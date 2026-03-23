@@ -1,70 +1,164 @@
-# Getting Started with Create React App
+# GitHub Explorer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React application that lets you search any GitHub user and explore their public profile and repositories — built as a frontend portfolio project.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- 🔍 Search any GitHub username instantly
+- 👤 Display profile — avatar, bio, location, followers, following, repo count
+- 📁 Browse public repositories sorted by star count
+- ⭐ See stars, forks, and language for each repo
+- 💀 Loading skeleton animation while fetching data
+- 🌙 Dark mode toggle with system preference detection
+- 💾 Theme preference persists across page refreshes
+- 🔗 Click any repo to open it directly on GitHub
+- 📄 Show more button — loads 6 repos at a time
+- ❌ Friendly error handling for invalid usernames
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Tech Stack
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+| Technology | Purpose |
+|---|---|
+| React 18 | UI framework |
+| Custom Hooks | `useGithub` for API logic, `useTheme` for dark mode |
+| GitHub REST API | User profile and repository data |
+| CSS Variables | Theme switching — light and dark mode |
+| localStorage | Persist theme preference |
+| Create React App | Project scaffolding and build tooling |
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Project Structure
 
-### `npm run build`
+```
+src/
+├── components/
+│   ├── SearchBar.jsx        # Search input and button
+│   ├── UserProfile.jsx      # Avatar, bio, stats display
+│   ├── RepoList.jsx         # Repo grid with RepoCard
+│   ├── SkeletonLoader.jsx   # Loading placeholder cards
+│   └── ThemeToggle.jsx      # Dark/light mode button
+├── hooks/
+│   ├── useGithub.js         # All GitHub API fetch logic
+│   └── useTheme.js          # Theme state and localStorage
+├── styles/
+│   ├── App.css
+│   ├── SearchBar.css
+│   ├── UserProfile.css
+│   ├── RepoList.css
+│   ├── Skeleton.css
+│   ├── Theme.css            # CSS variables for both themes
+│   └── ThemeToggle.css
+└── App.jsx                  # Root component — assembles everything
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Getting Started
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Prerequisites
 
-### `npm run eject`
+- Node.js 16 or higher
+- A free GitHub Personal Access Token
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Installation
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+# 1. Clone the repository
+git clone https://github.com/Junboiiiii/github-explorer.git
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# 2. Go into the project folder
+cd github-explorer
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+# 3. Install dependencies
+npm install
+```
 
-## Learn More
+### Environment Setup
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Create a `.env` file in the root folder:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+REACT_APP_GITHUB_TOKEN=your_github_token_here
+```
 
-### Code Splitting
+To get a free GitHub token:
+1. Go to **github.com → Settings → Developer settings**
+2. Click **Personal access tokens → Tokens (classic)**
+3. Click **Generate new token**
+4. Tick the `public_repo` scope
+5. Copy the token and paste it into `.env`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+> Without a token you get 60 API requests per hour. With a token you get 5000.
 
-### Analyzing the Bundle Size
+### Run Locally
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+npm start
+```
 
-### Making a Progressive Web App
+Opens at `http://localhost:3000` automatically.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Build for Production
 
-### Advanced Configuration
+```bash
+npm run build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+This project is deployed on Vercel. To deploy your own copy:
 
-### `npm run build` fails to minify
+1. Push this repo to GitHub
+2. Go to [vercel.com](https://vercel.com) and import the repo
+3. In Vercel dashboard → **Settings → Environment Variables**
+4. Add `REACT_APP_GITHUB_TOKEN` with your token value
+5. Click **Deploy**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+> Never put your `.env` file on GitHub. It is listed in `.gitignore` and should stay on your local machine only.
+
+---
+
+## API Reference
+
+This project uses the free [GitHub REST API](https://docs.github.com/en/rest) — no paid plan required.
+
+| Endpoint | Used for |
+|---|---|
+| `GET /users/{username}` | Fetch profile data |
+| `GET /users/{username}/repos` | Fetch public repositories |
+
+---
+
+## What I Learned Building This
+
+- Structuring a React app with separated components, hooks, and styles
+- Custom hooks to extract and reuse fetch logic (`useGithub`)
+- The `Promise.all` pattern to fire multiple API requests simultaneously
+- Loading skeleton UI pattern used by LinkedIn, GitHub, and Facebook
+- CSS variables for theming — switching dark/light mode with one attribute
+- Persisting user preferences with `localStorage`
+- Protecting API secrets with `.env` and `.gitignore`
+- Deploying a React app to Vercel with environment variables
+
+---
+
+## Future Improvements
+
+- [ ] Add React Router for individual repo detail pages
+- [ ] Debounced search input
+- [ ] Language usage pie chart with Chart.js
+- [ ] Search history — remember last 5 searches
+- [ ] Compare two GitHub users side by side
+
+---
+
+## Author
+
+**Niko** — built as part of a structured React learning curriculum.
+
+GitHub: [@Junboiiiii](https://github.com/Junboiiiii)

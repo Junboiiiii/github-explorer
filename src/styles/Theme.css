@@ -1,0 +1,34 @@
+/* Light mode — default */
+[data-theme="light"] {
+  --bg:           #ffffff;
+  --bg-secondary: #f6f8fa;
+  --bg-card:      #ffffff;
+  --border:       #d0d7de;
+  --text:         #24292e;
+  --text-muted:   #57606a;
+  --text-link:    #0969da;
+  --text-danger:  #d1242f;
+  --bg-danger:    #ffebe9;
+  --shadow:       rgba(0, 0, 0, 0.08);
+}
+
+/* Dark mode */
+[data-theme="dark"] {
+  --bg:           #0d1117;
+  --bg-secondary: #161b22;
+  --bg-card:      #161b22;
+  --border:       #30363d;
+  --text:         #c9d1d9;
+  --text-muted:   #8b949e;
+  --text-link:    #58a6ff;
+  --text-danger:  #ff7b72;
+  --bg-danger:    #3d1a1a;
+  --shadow:       rgba(0, 0, 0, 0.3);
+}
+
+/* Smooth transition when switching — feels polished */
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}

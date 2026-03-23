@@ -1,0 +1,67 @@
+/* The shimmer animation — moves a light sweep left to right */
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Apply this class to any placeholder element */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #e0e0e0 25%,
+    #f0f0f0 50%,
+    #e0e0e0 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 6px;
+}
+
+/* Profile skeleton layout */
+.skeleton-profile-card {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  border: 1px solid #d0d7de;
+  border-radius: 10px;
+  margin-bottom: 24px;
+  align-items: flex-start;
+}
+
+.skeleton-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.skeleton-lines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 6px;
+}
+
+.skeleton-stats {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+/* Repo skeleton layout */
+.skeleton-repo-card {
+  padding: 14px 16px;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeleton-repo-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
